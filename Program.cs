@@ -1,15 +1,16 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
-// Declara aquí tus tipos antes de cualquier código 'top-level'
+// ↓ ↓ ↓ ESTA DECLARACIÓN DEBE IR AQUÍ, justo después de los using ↓ ↓ ↓
 public record ShortenRequest(string longUrl);
 
+// TODO el resto del código va después
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 var urlMap = new ConcurrentDictionary<string, string>();
 
-bool IsValidUrl(string url) => 
+bool IsValidUrl(string url) =>
     Regex.IsMatch(url, @"^https:\/\/\S+$", RegexOptions.IgnoreCase);
 
 app.MapPost("/api/shorten", (ShortenRequest req) =>
