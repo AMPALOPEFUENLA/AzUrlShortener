@@ -35,3 +35,4 @@ app.MapGet("/{shortCode}", (string shortCode) =>
 });
 
 app.Run();
+
