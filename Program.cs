@@ -1,8 +1,6 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
-public record ShortenRequest(string longUrl);
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -15,10 +13,10 @@ app.MapPost("/api/shorten", (ShortenRequest req) =>
 {
     if (string.IsNullOrWhiteSpace(req.longUrl) || !IsValidUrl(req.longUrl))
         return Results.BadRequest(new { error = "URL inválida" });
-    
+
     var shortCode = Guid.NewGuid().ToString("n")[..8];
     urlMap[shortCode] = req.longUrl;
-    
+
     var shortUrl = $"https://azurlshortener-brdjdsh6d3bebuer.canadacentral-01.azurewebsites.net/{shortCode}";
     return Results.Ok(new { shortUrl, originalUrl = req.longUrl });
 });
@@ -27,7 +25,7 @@ app.MapGet("/{shortCode}", (string shortCode) =>
 {
     if (urlMap.TryGetValue(shortCode, out var longUrl))
         return Results.Redirect(longUrl);
-    
+
     return Results.NotFound("URL no encontrada");
 });
 
