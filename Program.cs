@@ -1,10 +1,8 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
-// ↓ ↓ ↓ ESTA DECLARACIÓN DEBE IR AQUÍ, justo después de los using ↓ ↓ ↓
 public record ShortenRequest(string longUrl);
 
-// TODO el resto del código va después
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
