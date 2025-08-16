@@ -1,10 +1,9 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
-// 1. DECLARACIONES DE TIPO ARRIBA DEL TODO — PON ESTO ANTES DE TU CÓDIGO:
+// Declara aquí tus tipos antes de cualquier código 'top-level'
 public record ShortenRequest(string longUrl);
 
-// 2. EMPIZA EL CÓDIGO PRINCIPAL AQUÍ:
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
