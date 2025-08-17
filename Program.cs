@@ -2,7 +2,22 @@ using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ✅ Habilitar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+
+// ✅ Activar la política CORS
+app.UseCors("AllowAll");
 
 var urlMap = new ConcurrentDictionary<string, string>();
 
